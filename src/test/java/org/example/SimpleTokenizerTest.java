@@ -4,7 +4,6 @@ import org.example.tokenizer.SimpleTokenizer;
 import org.example.tokenizer.Tokenizer;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,8 +26,13 @@ public class SimpleTokenizerTest {
     @Test
     public void testTokenizeWithMultipleSpaces() {
         Tokenizer tokenizer = new SimpleTokenizer();
-        String text = "Sample text content.";
+        String text = "Sample     text     content.";
         List<String> tokens = tokenizer.tokenize(text);
+
+        assertEquals(3, tokens.size());
+        assertTrue(tokens.contains("Sample"));
+        assertTrue(tokens.contains("text"));
+        assertTrue(tokens.contains("content"));
     }
 
     @Test
@@ -36,10 +40,6 @@ public class SimpleTokenizerTest {
         Tokenizer tokenizer = new SimpleTokenizer();
         String text = "Hello, world! This is a test.";
         List<String> tokens = tokenizer.tokenize(text);
-
-        for(String token : tokens) {
-            System.out.println(token);
-        }
 
         assertEquals(6, tokens.size());
         assertTrue(tokens.contains("Hello"));
